@@ -262,6 +262,16 @@ export function Navbar() {
             >
               <HeartIcon className="w-6 h-6" />
             </button>
+            <button
+              aria-label="Cart"
+              className="text-gray-800 hover:text-aravalli-maroon cursor-pointer relative px-2"
+              onClick={() => setCartOpen(true)}
+            >
+              <BagIcon className="w-6 h-6" />
+              <span className="absolute -top-1 -right-2 bg-aravalli-maroon text-white text-xs rounded-full px-1.5 py-0.5 font-bold">
+                {mockCart.length}
+              </span>
+            </button>
           </div>
         </nav>
       </header>

@@ -1,5 +1,7 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const products = [
   {
@@ -36,28 +38,42 @@ export function NewArrivals() {
   return (
     <section className="w-full bg-white py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 className="text-center text-3xl font-bold font-playfair text-aravalli-maroon sm:text-4xl">
+        <motion.h2
+          className="text-center text-3xl font-bold font-playfair text-aravalli-maroon sm:text-4xl"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.7 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
           New Arrivals
-        </h2>
+        </motion.h2>
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((product) => (
-            <Link key={product.title} href={product.href} className="group">
-              <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
-                <Image
-                  src={product.image}
-                  alt={product.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-              <div className="mt-4 text-center">
-                <h3 className="text-lg font-playfair font-semibold text-gray-900">
-                  {product.title}
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">{product.price}</p>
-              </div>
-            </Link>
+          {products.map((product, idx) => (
+            <motion.div
+              key={product.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
+            >
+              <Link href={product.href} className="group">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-lg transition-transform duration-300 group-hover:scale-105 group-hover:shadow-2xl">
+                  <Image
+                    src={product.image}
+                    alt={product.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="mt-4 text-center">
+                  <h3 className="text-lg font-playfair font-semibold text-gray-900">
+                    {product.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">{product.price}</p>
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
         <div className="mt-10 flex justify-center">

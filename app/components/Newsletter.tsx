@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export function Newsletter() {
   const [email, setEmail] = useState("");
@@ -20,16 +21,28 @@ export function Newsletter() {
   return (
     <section className="w-full bg-gradient-to-br from-aravalli-maroon to-aravalli-earth py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-playfair text-3xl font-bold text-aravalli-maroon sm:text-4xl">
+        <motion.div
+          className="mx-auto max-w-2xl text-center"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.7 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <h2 className="font-playfair text-3xl font-bold text-white sm:text-4xl drop-shadow-md">
             Join Our Journey
           </h2>
           <p className="mt-4 text-lg text-aravalli-beige">
             Subscribe to our newsletter for exclusive offers, new arrivals, and
             behind-the-scenes stories.
           </p>
-        </div>
-        <div className="mx-auto mt-10 max-w-xl">
+        </motion.div>
+        <motion.div
+          className="mx-auto mt-10 max-w-xl"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.7 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+        >
           <form
             onSubmit={handleSubmit}
             className="relative flex w-full items-center gap-2 rounded-full bg-white/80 shadow-lg py-2 pl-6 pr-2"
@@ -108,7 +121,7 @@ export function Newsletter() {
             </a>
             .
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
