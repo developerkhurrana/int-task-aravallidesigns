@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 
 const navigation = [
   { name: "KURTIS", href: "/kurtis" },
@@ -118,6 +119,7 @@ const TrashIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 export function Navbar() {
   const [cartOpen, setCartOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Cart sheet close on Esc
   useEffect(() => {
@@ -131,12 +133,11 @@ export function Navbar() {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur-md border-b border-aravalli-beige/40 font-sans">
-        <nav className="flex items-center justify-between h-20 px-6 lg:px-12 font-sans">
+        <nav className="flex items-center justify-between h-20 px-2 sm:px-4 lg:px-6 font-sans">
           {/* Logo */}
           <Link
             href="/"
-            className="flex flex-col items-center justify-center leading-tight select-none"
-            style={{ minWidth: 120 }}
+            className="flex flex-col items-center justify-center leading-tight select-none min-w-[100px]"
           >
             <span className="font-playfair text-2xl lg:text-3xl font-extrabold text-aravalli-maroon tracking-tight">
               Ethnics
@@ -146,8 +147,8 @@ export function Navbar() {
             </span>
           </Link>
 
-          {/* Nav Links */}
-          <div className="flex-1 flex justify-center">
+          {/* Desktop Nav Links */}
+          <div className="hidden md:flex flex-1 justify-center">
             <div className="flex gap-8">
               {navigation.map((item) => (
                 <Link
@@ -163,7 +164,7 @@ export function Navbar() {
 
           {/* Search Bar */}
           <form
-            className="flex items-center bg-white rounded-full border border-gray-300 focus-within:border-aravalli-maroon px-4 py-2 w-[400px] max-w-md mx-8 shadow-sm transition-colors"
+            className="hidden md:flex items-center bg-white rounded-full border border-gray-300 focus-within:border-aravalli-maroon px-4 py-2 w-[400px] max-w-md mx-8 shadow-sm transition-colors"
             onSubmit={(e) => e.preventDefault()}
           >
             <svg
@@ -187,8 +188,68 @@ export function Navbar() {
             />
           </form>
 
+          {/* Mobile: group search, hamburger, cart */}
+          <div className="flex-1 flex justify-end md:hidden">
+            <div className="flex items-center gap-2">
+              <form
+                className="flex items-center bg-white rounded-full border border-gray-300 focus-within:border-aravalli-maroon px-3 py-1 w-28 xs:w-36 sm:w-44 shadow-sm transition-colors px-2"
+                onSubmit={(e) => e.preventDefault()}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="#8B0000"
+                  className="w-5 h-5 mr-1"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"
+                  />
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="flex-1 bg-transparent outline-none text-aravalli-maroon placeholder-aravalli-maroon/60 text-sm font-sans"
+                />
+              </form>
+              <button
+                className="p-2 rounded focus:outline-none focus:ring-2 focus:ring-aravalli-maroon px-2"
+                aria-label="Open menu"
+                onClick={() => setMobileMenuOpen(true)}
+              >
+                <svg
+                  width="28"
+                  height="28"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </button>
+              <button
+                aria-label="Cart"
+                className="text-gray-800 hover:text-aravalli-maroon cursor-pointer relative px-2"
+                onClick={() => setCartOpen(true)}
+              >
+                <BagIcon className="w-6 h-6" />
+                <span className="absolute -top-1 -right-2 bg-aravalli-maroon text-white text-xs rounded-full px-1.5 py-0.5 font-bold">
+                  {mockCart.length}
+                </span>
+              </button>
+            </div>
+          </div>
+
           {/* Profile, Wishlist, Cart */}
-          <div className="flex items-center gap-8 min-w-[120px] justify-end">
+          <div className="hidden md:flex items-center gap-2 sm:gap-4 md:gap-6 min-w-[80px] justify-end">
             <button
               aria-label="Profile"
               className="text-gray-800 hover:text-aravalli-maroon cursor-pointer"
@@ -201,29 +262,19 @@ export function Navbar() {
             >
               <HeartIcon className="w-6 h-6" />
             </button>
-            <button
-              aria-label="Cart"
-              className="text-gray-800 hover:text-aravalli-maroon cursor-pointer relative"
-              onClick={() => setCartOpen(true)}
-            >
-              <BagIcon className="w-6 h-6" />
-              <span className="absolute -top-1 -right-2 bg-aravalli-maroon text-white text-xs rounded-full px-1.5 py-0.5 font-bold">
-                {mockCart.length}
-              </span>
-            </button>
           </div>
         </nav>
       </header>
       {/* Cart Sheet Drawer */}
       {cartOpen && (
-        <div className="fixed inset-0 z-[100] flex">
+        <div className="fixed inset-0 z-[400] flex">
           {/* Overlay */}
           <div
-            className="fixed inset-0 bg-black/30 z-40"
+            className="fixed inset-0 bg-black/30"
             onClick={() => setCartOpen(false)}
           />
           {/* Sheet */}
-          <aside className="ml-auto w-full max-w-md h-full bg-white shadow-2xl flex flex-col z-50 fixed right-0 top-0">
+          <aside className="ml-auto w-full max-w-md h-full bg-white shadow-2xl flex flex-col fixed right-0 top-0 z-[401]">
             <div className="flex items-center justify-between px-6 py-4 border-b">
               <h2 className="text-xl font-bold text-aravalli-maroon">
                 Your Cart
@@ -315,6 +366,74 @@ export function Navbar() {
           </aside>
         </div>
       )}
+      {/* Mobile Nav Drawer */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed inset-0 z-[200] flex md:hidden"
+          >
+            {/* Drawer */}
+            <div className="ml-auto w-3/4 max-w-xs h-full bg-white shadow-2xl flex flex-col p-6 z-[201]">
+              <div className="flex items-center justify-between mb-8">
+                <span className="font-playfair text-xl font-bold text-aravalli-maroon">
+                  Menu
+                </span>
+                <button
+                  className="text-gray-500 hover:text-aravalli-maroon p-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                  aria-label="Close menu"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="h-6 w-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <nav className="flex flex-col gap-6">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="text-lg font-bold uppercase tracking-widest font-sans text-gray-800 hover:text-aravalli-maroon transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+                {/* Mobile Profile and Wishlist */}
+                <div className="flex items-center gap-6 mt-4 pt-4 border-t">
+                  <button
+                    aria-label="Profile"
+                    className="text-gray-800 hover:text-aravalli-maroon cursor-pointer"
+                  >
+                    <UserIcon className="w-6 h-6" />
+                  </button>
+                  <button
+                    aria-label="Wishlist"
+                    className="text-gray-800 hover:text-aravalli-maroon cursor-pointer"
+                  >
+                    <HeartIcon className="w-6 h-6" />
+                  </button>
+                </div>
+              </nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
