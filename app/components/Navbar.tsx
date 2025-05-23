@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const navigation = [
   { name: "KURTIS", href: "/kurtis" },
@@ -260,9 +261,11 @@ export function Navbar() {
                       key={idx}
                       className="flex items-center gap-4 border-b pb-4 last:border-b-0 last:pb-0"
                     >
-                      <img
+                      <Image
                         src={item.image}
                         alt={item.title}
+                        width={64}
+                        height={80}
                         className="w-16 h-20 object-cover rounded-lg border"
                       />
                       <div className="flex-1">
