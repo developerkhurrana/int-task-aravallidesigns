@@ -132,10 +132,16 @@ export function Navbar() {
       <header className="fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur-md border-b border-aravalli-beige/40 font-sans">
         <nav className="flex items-center justify-between h-20 px-6 lg:px-12 font-sans">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            {/* Replace with your logo if available */}
-            <span className="font-playfair text-3xl font-bold text-aravalli-maroon tracking-tight">
-              E
+          <Link
+            href="/"
+            className="flex flex-col items-center justify-center leading-tight select-none"
+            style={{ minWidth: 120 }}
+          >
+            <span className="font-playfair text-2xl lg:text-3xl font-extrabold text-aravalli-maroon tracking-tight">
+              Ethnics
+            </span>
+            <span className="font-sans text-[10px] lg:text-xs font-light text-gray-500 tracking-widest mt-0 text-center">
+              by Aravalli
             </span>
           </Link>
 

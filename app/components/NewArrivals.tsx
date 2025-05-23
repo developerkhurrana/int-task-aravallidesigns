@@ -36,7 +36,7 @@ export function NewArrivals() {
   return (
     <section className="w-full bg-white py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 className="text-center text-3xl font-bold text-gray-900 sm:text-4xl">
+        <h2 className="text-center text-3xl font-bold font-playfair text-aravalli-maroon sm:text-4xl">
           New Arrivals
         </h2>
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -52,7 +52,7 @@ export function NewArrivals() {
                 />
               </div>
               <div className="mt-4 text-center">
-                <h3 className="text-lg font-medium text-gray-900">
+                <h3 className="text-lg font-playfair font-semibold text-gray-900">
                   {product.title}
                 </h3>
                 <p className="mt-1 text-sm text-gray-500">{product.price}</p>

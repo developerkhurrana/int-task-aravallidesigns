@@ -14,7 +14,7 @@ export function BrandStory() {
             />
           </div>
           <div className="flex flex-col justify-center">
-            <h2 className="font-serif text-3xl font-bold md:text-4xl">
+            <h2 className="font-playfair text-3xl font-bold text-aravalli-maroon md:text-4xl">
               Our Story
             </h2>
             <p className="mt-4 text-lg text-gray-600">

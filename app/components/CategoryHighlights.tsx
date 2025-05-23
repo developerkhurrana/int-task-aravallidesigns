@@ -26,7 +26,7 @@ export function CategoryHighlights() {
   return (
     <section className="w-full bg-white py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 className="text-center text-3xl font-bold text-gray-900 sm:text-4xl">
+        <h2 className="text-center text-3xl font-bold font-playfair text-aravalli-maroon sm:text-4xl">
           Shop by Category
         </h2>
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -46,7 +46,7 @@ export function CategoryHighlights() {
                 />
                 <div className="absolute inset-0 bg-black/40 transition-opacity group-hover:bg-black/50" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-2xl font-bold text-white">
+                  <h3 className="text-2xl font-bold font-playfair text-white">
                     {category.title}
                   </h3>
                 </div>

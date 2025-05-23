@@ -21,7 +21,7 @@ export function Newsletter() {
     <section className="w-full bg-gradient-to-br from-aravalli-maroon to-aravalli-earth py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-playfair text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="font-playfair text-3xl font-bold text-aravalli-maroon sm:text-4xl">
             Join Our Journey
           </h2>
           <p className="mt-4 text-lg text-aravalli-beige">
